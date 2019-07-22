@@ -1,18 +1,34 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import axios from 'axios'
 
 /**
  * COMPONENT
  */
-export const UserHome = props => {
-  const {email} = props
+class UserHome extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      userMemberships: []
+    }
+  }
 
-  return (
-    <div>
-      <h3>Welcome, {email}</h3>
-    </div>
-  )
+  async componentDidMount() {
+    const {data} = await axios.get('/api/users/memberships')
+    this.setState({userMemberships: data})
+    console.log('STATE:', this.state)
+  }
+
+  render() {
+    const email = this.props.email
+    return (
+      <div>
+        <h3>Welcome, {email}</h3>
+        {}
+      </div>
+    )
+  }
 }
 
 /**

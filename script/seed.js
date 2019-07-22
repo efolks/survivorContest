@@ -50,10 +50,30 @@ async function seed() {
   console.log(`seeded ${memberships.length} users`)
 
   const picks = await Promise.all([
-    survivorPick.create({week: 1, ownerId: 1, pickId: 2, opponentId: 1}),
-    survivorPick.create({week: 1, ownerId: 2, pickId: 1, opponentId: 2}),
-    survivorPick.create({week: 1, ownerId: 3, pickId: 3, opponentId: 1}),
-    survivorPick.create({week: 1, ownerId: 2, pickId: 1, opponentId: 3})
+    survivorPick.create({
+      week: 1,
+      survivorMembershipId: 1,
+      pickId: 2,
+      opponentId: 1
+    }),
+    survivorPick.create({
+      week: 1,
+      survivorMembershipId: 2,
+      pickId: 1,
+      opponentId: 2
+    }),
+    survivorPick.create({
+      week: 1,
+      survivorMembershipId: 3,
+      pickId: 3,
+      opponentId: 1
+    }),
+    survivorPick.create({
+      week: 1,
+      survivorMembershipId: 4,
+      pickId: 1,
+      opponentId: 3
+    })
   ])
 
   console.log(`seeded ${picks.length} users`)

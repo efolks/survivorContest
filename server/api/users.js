@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/:id/memberships', async (req, res, next) => {
+router.get('/memberships', async (req, res, next) => {
   try {
     const userId = req.user.id
     const userMemberships = await survivorMembership.findAll({

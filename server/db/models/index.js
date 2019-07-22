@@ -13,8 +13,8 @@ const nflTeam = require('./nflTeam')
 
 survivorMembership.belongsTo(User)
 survivorMembership.belongsTo(survivorContest)
-// survivorMembership.hasOne(survivorPick)
-survivorPick.belongsTo(survivorMembership, {as: 'owner'})
+survivorMembership.hasOne(survivorPick)
+// survivorPick.belongsTo(survivorMembership, {as: 'owner'})
 survivorPick.belongsTo(nflTeam, {as: 'pick'})
 survivorPick.belongsTo(nflTeam, {as: 'opponent'})
 
