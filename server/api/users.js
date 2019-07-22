@@ -1,5 +1,10 @@
 const router = require('express').Router()
-const {User, survivorMembership, survivorPick} = require('../db/models')
+const {
+  User,
+  survivorMembership,
+  survivorPick,
+  survivorContest
+} = require('../db/models')
 
 module.exports = router
 
@@ -22,7 +27,7 @@ router.get('/memberships', async (req, res, next) => {
     const userId = req.user.id
     const userMemberships = await survivorMembership.findAll({
       where: {userId},
-      include: [{model: survivorPick}]
+      include: [{model: survivorPick}, {model: survivorContest}]
     })
     res.send(userMemberships)
   } catch (error) {
