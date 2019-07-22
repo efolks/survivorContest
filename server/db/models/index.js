@@ -1,6 +1,8 @@
 const User = require('./user')
-const survivorContestant = require('./survivorContestant')
-const survivorLeague = require('./survivorLeague')
+const survivorMembership = require('./survivorMembership')
+const survivorContest = require('./survivorContest')
+const survivorPick = require('./survivorPick')
+const nflTeam = require('./nflTeam')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -9,8 +11,10 @@ const survivorLeague = require('./survivorLeague')
  *    BlogPost.belongsTo(User)
  */
 
-survivorContestant.belongsTo(User)
-survivorContestant.belongsTo(survivorLeague)
+survivorMembership.belongsTo(User)
+survivorMembership.belongsTo(survivorContest)
+survivorPick.belongsTo(survivorMembership)
+nflTeam.hasMany(survivorPick)
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -20,6 +24,8 @@ survivorContestant.belongsTo(survivorLeague)
  */
 module.exports = {
   User,
-  survivorContestant,
-  survivorLeague
+  survivorMembership,
+  survivorContest,
+  survivorPick,
+  nflTeam
 }

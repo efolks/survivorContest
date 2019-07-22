@@ -1,11 +1,11 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const survivorLeague = db.define('survivor-league', {
+const survivorContest = db.define('survivor-contest', {
   name: {
     type: Sequelize.STRING,
     allowNull: false
   }
 })
 
-module.exports = survivorLeague
+module.exports = survivorContest

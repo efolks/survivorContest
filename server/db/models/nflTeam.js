@@ -1,11 +1,15 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const survivorContestant = db.define('survivor-contestant', {
+const nflTeam = db.define('nflTeam', {
+  home: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
   name: {
     type: Sequelize.STRING,
     allowNull: false
   }
 })
 
-module.exports = survivorContestant
+module.exports = nflTeam
