@@ -13,8 +13,10 @@ const nflTeam = require('./nflTeam')
 
 survivorMembership.belongsTo(User)
 survivorMembership.belongsTo(survivorContest)
-survivorPick.belongsTo(survivorMembership)
-nflTeam.hasMany(survivorPick)
+// survivorMembership.hasOne(survivorPick)
+survivorPick.belongsTo(survivorMembership, {as: 'owner'})
+survivorPick.belongsTo(nflTeam, {as: 'pick'})
+survivorPick.belongsTo(nflTeam, {as: 'opponent'})
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,

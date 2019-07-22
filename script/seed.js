@@ -1,7 +1,13 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {
+  User,
+  survivorContest,
+  nflTeam,
+  survivorMembership,
+  survivorPick
+} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -9,10 +15,49 @@ async function seed() {
 
   const users = await Promise.all([
     User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({email: 'murphy@email.com', password: '123'}),
+    User.create({email: 'eric@email.com', password: '123'})
   ])
 
   console.log(`seeded ${users.length} users`)
+
+  const contests = await Promise.all([
+    survivorContest.create({name: 'Cody/s Test Contest'}),
+    survivorContest.create({name: 'Murphy/s Test Contest'})
+  ])
+
+  console.log(`seeded ${contests.length} users`)
+
+  const teams = await Promise.all([
+    nflTeam.create({home: 'Indianapolis', name: 'Colts'}),
+    nflTeam.create({home: 'New York', name: 'Giants'}),
+    nflTeam.create({home: 'New England', name: 'Patriots'})
+  ])
+
+  console.log(`seeded ${teams.length} users`)
+
+  const memberships = await Promise.all([
+    survivorMembership.create({name: 'cody', userId: 1, survivorContestId: 1}),
+    survivorMembership.create({name: 'eric', userId: 3, survivorContestId: 1}),
+    survivorMembership.create({
+      name: 'murphy',
+      userId: 2,
+      survivorContestId: 2
+    }),
+    survivorMembership.create({name: 'eric', userId: 3, survivorContestId: 2})
+  ])
+
+  console.log(`seeded ${memberships.length} users`)
+
+  const picks = await Promise.all([
+    survivorPick.create({week: 1, ownerId: 1, pickId: 2, opponentId: 1}),
+    survivorPick.create({week: 1, ownerId: 2, pickId: 1, opponentId: 2}),
+    survivorPick.create({week: 1, ownerId: 3, pickId: 3, opponentId: 1}),
+    survivorPick.create({week: 1, ownerId: 2, pickId: 1, opponentId: 3})
+  ])
+
+  console.log(`seeded ${picks.length} users`)
+
   console.log(`seeded successfully`)
 }
 
