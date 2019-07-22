@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import axios from 'axios'
+import AllUserMemberships from './AllUserMemberships'
 
 /**
  * COMPONENT
@@ -25,7 +26,7 @@ class UserHome extends React.Component {
     return (
       <div>
         <h3>Welcome, {email}</h3>
-        {}
+        <AllUserMemberships memberships={this.state.userMemberships} />
       </div>
     )
   }
