@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const survivorPick = db.define('survivor-pick', {
+const survivorPick = db.define('survivorPick', {
   week: {
     type: Sequelize.INTEGER,
     allowNull: false

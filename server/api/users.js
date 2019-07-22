@@ -27,7 +27,10 @@ router.get('/memberships', async (req, res, next) => {
     const userId = req.user.id
     const userMemberships = await survivorMembership.findAll({
       where: {userId},
-      include: [{model: survivorPick}, {model: survivorContest}]
+      include: [
+        {model: survivorPick, where: {active: true}},
+        {model: survivorContest}
+      ]
     })
     res.send(userMemberships)
   } catch (error) {
