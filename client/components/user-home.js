@@ -1,35 +1,28 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import AllUserMemberships from './AllUserMemberships'
 
-/**
- * COMPONENT
- */
-class UserHome extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      userMemberships: []
+const UserHome = props => {
+  const [userMemberships, setUserMemberships] = useState([])
+
+  useEffect(() => {
+    const fetchMemberships = async () => {
+      const {data} = await axios.get('/api/users/memberships')
+      setUserMemberships(data)
     }
-  }
+    fetchMemberships()
+  }, [])
 
-  async componentDidMount() {
-    const {data} = await axios.get('/api/users/memberships')
-    this.setState({userMemberships: data})
-    console.log('STATE:', this.state)
-  }
+  const email = props.email
 
-  render() {
-    const email = this.props.email
-    return (
-      <div>
-        <h3>Welcome, {email}</h3>
-        <AllUserMemberships memberships={this.state.userMemberships} />
-      </div>
-    )
-  }
+  return (
+    <div>
+      <h3>Welcome, {email}</h3>
+      <AllUserMemberships memberships={userMemberships} />
+    </div>
+  )
 }
 
 /**
