@@ -3,7 +3,8 @@ const {
   User,
   survivorMembership,
   survivorPick,
-  survivorContest
+  survivorContest,
+  nflTeam
 } = require('../db/models')
 
 module.exports = router
@@ -28,7 +29,14 @@ router.get('/memberships', async (req, res, next) => {
     const userMemberships = await survivorMembership.findAll({
       where: {userId},
       include: [
-        {model: survivorPick, where: {active: true}},
+        {
+          model: survivorPick,
+          where: {active: true},
+          include: [
+            {model: nflTeam, as: 'pick'},
+            {model: nflTeam, as: 'opponent'}
+          ]
+        },
         {model: survivorContest}
       ]
     })
